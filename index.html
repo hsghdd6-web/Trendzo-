@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Website — Aapka Naam</title>
+  <meta name="description" content="Simple, responsive single-file website." />
+  <style>
+    :root{
+      --primary:#0b76ef;
+      --dark:#0f1724;
+      --muted:#6b7280;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:var(--dark); background:#f7fafc}
+    a{text-decoration:none; color:inherit}
+    header{background:linear-gradient(90deg, rgba(11,118,239,0.07), rgba(11,118,239,0.02)); backdrop-filter: blur(2px); position:sticky; top:0; z-index:20}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .logo{font-weight:700; color:var(--primary)}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0; align-items:center}
+    nav li{font-size:15px}
+    .btn{background:var(--primary); color:white; padding:10px 14px; border-radius:10px; font-weight:600}
+    /* mobile menu */
+    .menu-toggle{display:none; cursor:pointer; padding:8px}
+    .hero{display:grid; grid-template-columns:1fr 420px; gap:30px; align-items:center; padding:48px 0}
+    .hero h1{font-size:34px; margin:0 0 12px}
+    .hero p{color:var(--muted); margin:0 0 18px}
+    .card{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 18px rgba(15,23,36,0.06)}
+    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0}
+    .feature{padding:18px; border-radius:10px; background:linear-gradient(180deg,#fff,#fbfdff); box-shadow:0 6px 14px rgba(11,118,239,0.04)}
+    section{padding:30px 0}
+    footer{padding:20px 0; color:var(--muted); font-size:14px}
+
+    /* contact form */
+    form{display:grid; gap:12px}
+    input, textarea{padding:10px; border:1px solid #e6e9ef; border-radius:8px; font-size:14px}
+    textarea{min-height:120px; resize:vertical}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      nav ul{display:none}
+      .menu-toggle{display:block}
+      .mobile-menu{display:none; padding:10px 0}
+      .mobile-menu.open{display:block}
+      .features{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">Aapka<span style="color:var(--dark);">Site</span></div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex; gap:12px; align-items:center">
+        <a class="btn" href="#contact">Contact</a>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mobile-menu card" id="mobileMenu" style="margin-top:8px; display:none">
+        <a href="#home" style="display:block; padding:8px 0">Home</a>
+        <a href="#about" style="display:block; padding:8px 0">About</a>
+        <a href="#services" style="display:block; padding:8px 0">Services</a>
+        <a href="#contact" style="display:block; padding:8px 0">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <div>
+        <h1>Ek simple, tez aur responsive website</h1>
+        <p>Yeh template chhota, saaf aur asaan hai — aap isey apne business ya personal portfolio ke liye turant use kar sakte ho.</p>
+        <div style="display:flex; gap:12px; align-items:center">
+          <a class="btn" href="#contact">Get Started</a>
+          <a href="#services" style="padding:10px 14px; border-radius:10px;">Our Services</a>
+        </div>
+        <div style="margin-top:18px; display:flex; gap:12px;">
+          <div class="card" style="flex:1">Quick info<br><small style="color:var(--muted)">Open-source · Responsive · Easy to edit</small></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3 style="margin-top:0">Contact Form</h3>
+          <form id="contactForm">
+            <input type="text" id="name" placeholder="Aapka Naam" required />
+            <input type="email" id="email" placeholder="Email" required />
+            <textarea id="message" placeholder="Message"></textarea>
+            <button type="submit" class="btn">Send Message</button>
+            <div id="formMsg" style="margin-top:8px; color:var(--muted)"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p style="color:var(--muted)">Yahan aap apne baare me 2-3 line likh sakte ho. Portfolio, business description ya service summary daalo.</p>
+      <div class="features">
+        <div class="feature">
+          <h4>Fast</h4>
+          <p style="color:var(--muted)">Optimized CSS, minimal JS.</p>
+        </div>
+        <div class="feature">
+          <h4>Responsive</h4>
+          <p style="color:var(--muted)">Mobile-first design.</p>
+        </div>
+        <div class="feature">
+          <h4>Customizable</h4>
+          <p style="color:var(--muted)">Easily change colors and text.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <p style="color:var(--muted)">Kuch services ya offerings yahan mention karo.</p>
+      <div style="display:grid; gap:12px; margin-top:12px">
+        <div class="card">Service 1 — Short description</div>
+        <div class="card">Service 2 — Short description</div>
+        <div class="card">Service 3 — Short description</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p style="color:var(--muted)">Email: <a href="mailto:hello@example.com">hello@example.com</a> · Phone: +91 12345 67890</p>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <div style="border-top:1px solid #eef2f7; padding-top:12px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> AapkaSite. All rights reserved.</div>
+      <div style="color:var(--muted)">Made with ♥</div>
+    </div>
+  </footer>
+
+  <script>
+    // small JS for menu and form
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', ()=>{
+      mobileMenu.classList.toggle('open');
+    });
+
+    const form = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMsg');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !email){
+        formMsg.textContent = 'Naam aur email zaroori hain.';
+        return;
+      }
+      // For demo only: show success and clear form. Connect to backend to actually send.
+      formMsg.style.color = 'green';
+      formMsg.textContent = 'Thank you, message received (demo).';
+      form.reset();
+      setTimeout(()=>{ formMsg.textContent=''; formMsg.style.color=''; }, 3000);
+    });
+  </script>
+</body>
+</html>
