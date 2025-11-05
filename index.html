@@ -3,178 +3,257 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simple Website — Aapka Naam</title>
-  <meta name="description" content="Simple, responsive single-file website." />
-  <style>
-    :root{
-      --primary:#0b76ef;
-      --dark:#0f1724;
-      --muted:#6b7280;
-      --card:#ffffff;
-    }
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:var(--dark); background:#f7fafc}
-    a{text-decoration:none; color:inherit}
-    header{background:linear-gradient(90deg, rgba(11,118,239,0.07), rgba(11,118,239,0.02)); backdrop-filter: blur(2px); position:sticky; top:0; z-index:20}
-    .container{max-width:1100px; margin:0 auto; padding:0 20px}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .logo{font-weight:700; color:var(--primary)}
-    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0; align-items:center}
-    nav li{font-size:15px}
-    .btn{background:var(--primary); color:white; padding:10px 14px; border-radius:10px; font-weight:600}
-    /* mobile menu */
-    .menu-toggle{display:none; cursor:pointer; padding:8px}
-    .hero{display:grid; grid-template-columns:1fr 420px; gap:30px; align-items:center; padding:48px 0}
-    .hero h1{font-size:34px; margin:0 0 12px}
-    .hero p{color:var(--muted); margin:0 0 18px}
-    .card{background:var(--card); border-radius:12px; padding:18px; box-shadow:0 6px 18px rgba(15,23,36,0.06)}
-    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0}
-    .feature{padding:18px; border-radius:10px; background:linear-gradient(180deg,#fff,#fbfdff); box-shadow:0 6px 14px rgba(11,118,239,0.04)}
-    section{padding:30px 0}
-    footer{padding:20px 0; color:var(--muted); font-size:14px}
+  <title>Trendzo — Everything You Need, One Place</title>
+  <meta name="description" content="Trendzo - Mix-category e-commerce: fashion, gadgets, home & more. 3D hero, fast checkout, secure payments via Shopify." />
+  <meta name="theme-color" content="#0f172a">
 
-    /* contact form */
-    form{display:grid; gap:12px}
-    input, textarea{padding:10px; border:1px solid #e6e9ef; border-radius:8px; font-size:14px}
-    textarea{min-height:120px; resize:vertical}
+  <!-- IMPORTANT: Replace these two placeholders -->
+  <!-- 1) SPLINE_EMBED_URL -> your Spline embed URL -->
+  <!-- 2) SHOPIFY_STORE_URL -> your Shopify store (e.g. https://trendzo.myshopify.com) -->
+
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#06b6d4;--muted:#475569;--white:#ffffff}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,#f8fafc 0%, #eef2ff 100%);color:#0b1220}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo .mark{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav a{margin-left:18px;text-decoration:none;color:#0b1220;font-weight:600}
+
+    .hero{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:center;padding:36px 0}
+    .hero .copy h1{font-size:36px;margin:0 0 12px}
+    .hero .copy p{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px}
+    .btn{background:var(--accent);color:#fff;padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .secondary{background:transparent;border:2px solid #e6eef6;color:#0b1220;padding:10px 16px;border-radius:10px}
+
+    .spline-wrap{background:#fff;border-radius:14px;box-shadow:0 10px 25px rgba(12,18,31,0.08);overflow:hidden;height:420px}
+    .spline-wrap iframe{width:100%;height:100%;border:0}
+
+    .cats{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+    .cat{flex:1 1 140px;background:#fff;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:24px 0}
+    .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 8px 25px rgba(2,6,23,0.06);display:flex;flex-direction:column;gap:10px}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .price{font-weight:800}
+
+    footer{margin-top:40px;padding:20px 0;color:var(--muted);font-size:14px;text-align:center}
 
     @media (max-width:900px){
       .hero{grid-template-columns:1fr;}
-      .features{grid-template-columns:repeat(2,1fr)}
+      .spline-wrap{height:300px}
+      nav a{display:none}
     }
-    @media (max-width:640px){
-      nav ul{display:none}
-      .menu-toggle{display:block}
-      .mobile-menu{display:none; padding:10px 0}
-      .mobile-menu.open{display:block}
-      .features{grid-template-columns:1fr}
-    }
+
+    .cart-btn{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;border:0;padding:14px;border-radius:50px;box-shadow:0 12px 30px rgba(6,182,212,0.18);cursor:pointer}
+    .cart-modal{position:fixed;right:18px;bottom:80px;width:360px;max-width:90%;Background:#fff;border-radius:12px;padding:14px;box-shadow:0 30px 60px rgba(2,6,23,0.2);display:none}
+    .cart-item{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+    .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+    .muted{color:var(--muted)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="logo">Aapka<span style="color:var(--dark);">Site</span></div>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="mark">Tz</div>
+        <div>
+          <div style="font-weight:800">Trendzo</div>
+          <div style="font-size:12px;color:var(--muted)">Everything You Need — One Place</div>
+        </div>
+      </div>
       <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <div style="display:flex; gap:12px; align-items:center">
-        <a class="btn" href="#contact">Contact</a>
-        <div class="menu-toggle" id="menuToggle">☰</div>
-      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="copy">
+          <h1>Shop smart. Shop Trendzo.</h1>
+          <p>Fashion, gadgets, home decor — curated collections for daily life. Interactive 3D hero to show best sellers.</p>
+          <div class="cta-row">
+            <button class="btn" id="shopNow">🛒 Shop Now</button>
+            <button class="secondary" id="exploreBtn">Explore Collections</button>
+          </div>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:14px">Fast shipping • Secure checkout via Shopify • Easy returns</div>
+        </div>
+
+        <div class="spline-wrap" aria-hidden="false">
+          <!-- Replace the src below with your Spline "Embed" URL -->
+          <iframe id="splineFrame" src="SPLINE_EMBED_URL" title="3D hero scene"></iframe>
+        </div>
+      </section>
+
+      <section class="cats" aria-label="categories">
+        <div class="cat"><img src="https://picsum.photos/60?1" width="60" height="60" style="border-radius:8px;object-fit:cover"> <div><strong>Fashion</strong><div class="muted">Clothes & Accessories</div></div></div>
+        <div class="cat"><img src="https://picsum.photos/60?2" width="60" height="60" style="border-radius:8px;object-fit:cover"> <div><strong>Gadgets</strong><div class="muted">Latest tech</div></div></div>
+        <div class="cat"><img src="https://picsum.photos/60?3" width="60" height="60" style="border-radius:8px;object-fit:cover"> <div><strong>Home</strong><div class="muted">Decor & Utility</div></div></div>
+        <div class="cat"><img src="https://picsum.photos/60?4" width="60" height="60" style="border-radius:8px;object-fit:cover"> <div><strong>Beauty</strong><div class="muted">Care & Wellness</div></div></div>
+      </section>
+
+      <section id="products">
+        <h2 style="margin:0 0 12px">Featured Products</h2>
+        <div class="grid" id="productGrid">
+          <!-- Product cards injected by JS -->
+        </div>
+      </section>
+
+      <section id="about" style="margin-top:28px">
+        <h3>About Trendzo</h3>
+        <p class="muted">Trendzo is a modern mix-category marketplace built for discovery. We showcase best sellers across categories and focus on a smooth shopping experience powered by a 3D interactive storefront and Shopify checkout.</p>
+      </section>
+
+      <section id="contact" style="margin-top:28px">
+        <h3>Contact</h3>
+        <p class="muted">Email: support@trendzo.in • Phone: +91-XXXXXXXXXX</p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Trendzo — Built with care. Hosted on app.emergent.sh
+    </footer>
+  </div>
+
+  <button class="cart-btn" id="openCart">🛒 Cart (<span id="cartCount">0</span>)</button>
+  <div class="cart-modal" id="cartModal">
+    <h4>Your Cart</h4>
+    <div id="cartItems"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+      <div class="muted">Total: ₹<span id="cartTotal">0</span></div>
+      <button class="btn" id="checkoutBtn">Checkout</button>
     </div>
-    <div class="container">
-      <div class="mobile-menu card" id="mobileMenu" style="margin-top:8px; display:none">
-        <a href="#home" style="display:block; padding:8px 0">Home</a>
-        <a href="#about" style="display:block; padding:8px 0">About</a>
-        <a href="#services" style="display:block; padding:8px 0">Services</a>
-        <a href="#contact" style="display:block; padding:8px 0">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container" id="home">
-    <section class="hero">
-      <div>
-        <h1>Ek simple, tez aur responsive website</h1>
-        <p>Yeh template chhota, saaf aur asaan hai — aap isey apne business ya personal portfolio ke liye turant use kar sakte ho.</p>
-        <div style="display:flex; gap:12px; align-items:center">
-          <a class="btn" href="#contact">Get Started</a>
-          <a href="#services" style="padding:10px 14px; border-radius:10px;">Our Services</a>
-        </div>
-        <div style="margin-top:18px; display:flex; gap:12px;">
-          <div class="card" style="flex:1">Quick info<br><small style="color:var(--muted)">Open-source · Responsive · Easy to edit</small></div>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-          <h3 style="margin-top:0">Contact Form</h3>
-          <form id="contactForm">
-            <input type="text" id="name" placeholder="Aapka Naam" required />
-            <input type="email" id="email" placeholder="Email" required />
-            <textarea id="message" placeholder="Message"></textarea>
-            <button type="submit" class="btn">Send Message</button>
-            <div id="formMsg" style="margin-top:8px; color:var(--muted)"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <h2>About</h2>
-      <p style="color:var(--muted)">Yahan aap apne baare me 2-3 line likh sakte ho. Portfolio, business description ya service summary daalo.</p>
-      <div class="features">
-        <div class="feature">
-          <h4>Fast</h4>
-          <p style="color:var(--muted)">Optimized CSS, minimal JS.</p>
-        </div>
-        <div class="feature">
-          <h4>Responsive</h4>
-          <p style="color:var(--muted)">Mobile-first design.</p>
-        </div>
-        <div class="feature">
-          <h4>Customizable</h4>
-          <p style="color:var(--muted)">Easily change colors and text.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <h2>Services</h2>
-      <p style="color:var(--muted)">Kuch services ya offerings yahan mention karo.</p>
-      <div style="display:grid; gap:12px; margin-top:12px">
-        <div class="card">Service 1 — Short description</div>
-        <div class="card">Service 2 — Short description</div>
-        <div class="card">Service 3 — Short description</div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p style="color:var(--muted)">Email: <a href="mailto:hello@example.com">hello@example.com</a> · Phone: +91 12345 67890</p>
-    </section>
-
-  </main>
-
-  <footer class="container">
-    <div style="border-top:1px solid #eef2f7; padding-top:12px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
-      <div>© <span id="year"></span> AapkaSite. All rights reserved.</div>
-      <div style="color:var(--muted)">Made with ♥</div>
-    </div>
-  </footer>
+  </div>
 
   <script>
-    // small JS for menu and form
+    // ======= Replace SHOPIFY_STORE_URL with your Shopify store URL when ready =======
+    // Example: const SHOPIFY_STORE_URL = 'https://trendzo.myshopify.com';
+    const SHOPIFY_STORE_URL = 'https://YOUR_SHOPIFY_STORE.myshopify.com';
+
+    // ======= Sample product data (replace with your real products & shopify handles) =======
+    // Each product has an optional shopifyHandle used to create direct product links on your store.
+    const PRODUCTS = [
+      {id:1,title:'Classic Cotton T-Shirt',price:499,image:'https://picsum.photos/400?product1',category:'Fashion',shopifyHandle:'classic-cotton-tshirt'},
+      {id:2,title:'Wireless Earbuds',price:1999,image:'https://picsum.photos/400?product2',category:'Gadgets',shopifyHandle:'wireless-earbuds'},
+      {id:3,title:'Minimal Desk Lamp',price:899,image:'https://picsum.photos/400?product3',category:'Home',shopifyHandle:'minimal-desk-lamp'},
+      {id:4,title:'Aroma Candle Set',price:599,image:'https://picsum.photos/400?product4',category:'Beauty',shopifyHandle:'aroma-candle-set'}
+    ];
+
+    // ======= Simple client-side cart (for demo). For production, use Shopify cart or Buy Button JS. =======
+    let cart = {};
+    const productGrid = document.getElementById('productGrid');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartModal = document.getElementById('cartModal');
+
+    function productShopifyUrl(p){
+      if(!p.shopifyHandle) return SHOPIFY_STORE_URL;
+      // direct link to Shopify product page
+      return `${SHOPIFY_STORE_URL}/products/${p.shopifyHandle}`;
+    }
+
+    function renderProducts(){
+      productGrid.innerHTML = PRODUCTS.map(p => `
+        <div class="card">
+          <img src="${p.image}" alt="${p.title}">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700">${p.title}</div>
+              <div class="muted" style="font-size:13px">${p.category}</div>
+            </div>
+            <div class="price">₹${p.price}</div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <!-- Add to cart demo - keeps items client-side. For real purchase, go to Shopify product page -->
+            <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
+            <button class="secondary" onclick="openShopifyProduct(${p.id})">Buy on Shopify</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToCart(id){
+      cart[id] = (cart[id] || 0) + 1;
+      updateCartUI();
+    }
+
+    function removeFromCart(id){
+      delete cart[id];
+      updateCartUI();
+    }
+
+    function updateCartUI(){
+      const ids = Object.keys(cart);
+      cartCount.textContent = ids.reduce((s,i)=>s+cart[i],0);
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+      ids.forEach(id => {
+        const p = PRODUCTS.find(x=>x.id==id);
+        const qty = cart[id];
+        total += p.price*qty;
+        const node = document.createElement('div');
+        node.className = 'cart-item';
+        node.innerHTML = `
+          <img src="${p.image}" alt="${p.title}">
+          <div style="flex:1">
+            <div style="font-weight:700">${p.title}</div>
+            <div class="muted">₹${p.price} × ${qty}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800">₹${p.price*qty}</div>
+            <button class="secondary" style="margin-top:8px" onclick="removeFromCart(${id})">Remove</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(node);
+      });
+      cartTotalEl.textContent = total;
+    }
+
+    function viewProduct(id){
+      const p = PRODUCTS.find(x=>x.id==id);
+      alert(p.title + '\nPrice: ₹' + p.price + '\nCategory: ' + p.category);
+    }
+
+    function openShopifyProduct(id){
+      const p = PRODUCTS.find(x=>x.id==id);
+      const url = productShopifyUrl(p);
+      window.open(url,'_blank');
+    }
+
+    // Checkout placeholder - we recommend redirecting to Shopify cart/checkout when ready
+    document.getElementById('checkoutBtn').addEventListener('click',()=>{
+      if(Object.keys(cart).length===0){alert('Cart is empty');return}
+      // Build a simple redirect to Shopify with line items is non-trivial without Storefront API.
+      // Instead, prompt user to complete purchase on product pages or integrate Shopify Buy Button JS.
+      alert('For production, integrate Shopify Buy Button or redirect customers to product pages for checkout.');
+    });
+
+    // UI bindings
+    document.getElementById('openCart').addEventListener('click',()=>{
+      cartModal.style.display = cartModal.style.display==='block' ? 'none' : 'block';
+    });
+
+    document.getElementById('shopNow').addEventListener('click',()=>{
+      document.getElementById('products').scrollIntoView({behavior:'smooth'});
+    });
+
+    document.getElementById('exploreBtn').addEventListener('click',()=>{
+      alert('Explore Collections — link to category pages or collections.');
+    });
+
+    // init
+    renderProducts();
+    updateCartUI();
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click', ()=>{
-      mobileMenu.classList.toggle('open');
-    });
-
-    const form = document.getElementById('contactForm');
-    const formMsg = document.getElementById('formMsg');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if(!name || !email){
-        formMsg.textContent = 'Naam aur email zaroori hain.';
-        return;
-      }
-      // For demo only: show success and clear form. Connect to backend to actually send.
-      formMsg.style.color = 'green';
-      formMsg.textContent = 'Thank you, message received (demo).';
-      form.reset();
-      setTimeout(()=>{ formMsg.textContent=''; formMsg.style.color=''; }, 3000);
-    });
   </script>
 </body>
 </html>
